@@ -36,7 +36,7 @@ Leia em diferentes linguagens: [![CN](/assets/flags/CN.png)**CN**](/README.chine
 
 <br/><br/>
 
-# Bem-vindo! 3 Coisas Que Você Precisa de Saber:
+# Bem-vindo! 3 Coisas Que Você Precisa Saber:
 
 **1. Quando você lê aqui, na verdade você lê alguns dos melhores artigos de Node.js -** este é um resumo e curadoria dos mais bem ranqueados conteúdos sobre as melhores práticas do Node.js.
 
@@ -72,9 +72,9 @@ Leia em diferentes linguagens: [![CN](/assets/flags/CN.png)**CN**](/README.chine
 
 ## ![✔] 1.2 Coloque seus Componentes em Camadas, mantenha o Express dentro de seus limites
 
-**TL;DR:** Cada componente deve conter 'layers' (camadas) - um objeto dedicado para web, lógica e código de acesso a dados. Isso não apenas faz uma separação clara dos interesses, como também facilita significativamente os mocks e testes de sistema. Embora este seja um padrão muito comum, desenvolvedores de API tendem a misturar camadas, passando os objetos da camada Web (req e res do Express) para a lógica de negócios e camadas de dados - isto torna sua aplicação dependente a acessível apenas pelo Express.
+**TL;DR:** Cada componente deve conter 'layers' (camadas) - um objeto dedicado para web, lógica e código de acesso a dados. Isso não apenas faz uma separação clara dos interesses, como também facilita significativamente os mocks e testes de sistema. Embora este seja um padrão muito comum, desenvolvedores de API tendem a misturar camadas, passando os objetos da camada Web (req e res do Express) para a lógica de negócios e camadas de dados - isto torna sua aplicação dependente, e acessível apenas pelo Express.
 
-**Caso contrário:** App that mixes web objects with other layers can not be accessed by testing code, CRON jobs and other non-Express callers
+**Caso contrário:** Uma aplicação que misture objetos WEB com outras camadas não podem ser acessadas por códigos de teste, CRON jobs e outras chamadas não oriundas do Express.
 
 🔗 [**Leia Mais: seu app em camadas**](/sections/projectstructre/createlayers.md)
 
@@ -120,7 +120,7 @@ Leia em diferentes linguagens: [![CN](/assets/flags/CN.png)**CN**](/README.chine
 
 **Caso contrário:** O estilo de callback do Node.js, function(err, response), é um caminho promissor para um código insustentável devido à combinação de manipulação de erro com código casual, aninhamento excessivo e padrões de codificação inadequados.
 
-🔗 [**Leia Mais: evitando callbacks**](/sections/errorhandling/asyncerrorhandling.md)
+🔗 [**Leia Mais: evitando callbacks**](/sections/errorhandling/asyncerrorhandling.brazilian-portuguese.md)
 
 <br/><br/>
 
@@ -130,7 +130,7 @@ Leia em diferentes linguagens: [![CN](/assets/flags/CN.png)**CN**](/README.chine
 
 **Caso contrário:** Ao invocar algum componente, sendo incerto qual tipo de erro irá retornar - isso faz com que o tratamento de erros seja muito mais difícil. Até pior, usar tipos personalizados para descrever erros pode levar à perda de informações de erros críticos, como o stack trace!
 
-🔗 [**Leia Mais: usando o objeto interno de erro**](/sections/errorhandling/useonlythebuiltinerror.md)
+🔗 [**Leia Mais: usando o objeto interno de erro**](/sections/errorhandling/useonlythebuiltinerror.brazilian-portuguese.md)
 
 <br/><br/>
 
@@ -140,17 +140,17 @@ Leia em diferentes linguagens: [![CN](/assets/flags/CN.png)**CN**](/README.chine
 
 **Caso contrário:** Você pode sempre reiniciar o aplicativo quando um erro aparecer, mas por que derrubar aproximadamente 5000 usuários que estavam online por causa de um pequeno erro operacional previsto? O contrário também não é ideal - manter a aplicação rodando quando um problema desconhecido (erro de programação) ocorreu, pode levar para um comportamento não esperado. Diferenciá-los, permite agir com tato e aplicar uma abordagem equilibrada baseada no dado contexto.
 
-🔗 [**Leia Mais: erros operacionais vs erros de programação**](/sections/errorhandling/operationalvsprogrammererror.md)
+🔗 [**Leia Mais: erros operacionais vs erros de programação**](/sections/errorhandling/operationalvsprogrammererror.brazilian-portuguese.md)
 
 <br/><br/>
 
 ## ![✔] 2.4 Trate erros de forma centralizada, não dentro de um middleware do Express
 
-**TL;DR:** A lógica de tratamento de erros, bem como email para administrador e loggin, deve ser encapsulada em um objeto dedicado e centralizado que todos os endpoints (por exemplo, middleware do Express, cron jobs, testes unitários) chamem quando um erro é recebido.
+**TL;DR:** A lógica de tratamento de erros, bem como email para administrador e registros (logs), deve ser encapsulada em um objeto dedicado e centralizado que todos os endpoints (por exemplo, middleware do Express, cron jobs, testes unitários) chamem quando um erro é recebido.
 
 **Caso contrário:** Não tratar os erros em um mesmo lugar irá levar à duplicidade de código, e provavelmente, a erros tratados incorretamente.
 
-🔗 [**Leia Mais: tratando erros de forma centralizada**](/sections/errorhandling/centralizedhandling.md)
+🔗 [**Leia Mais: tratando erros de forma centralizada**](/sections/errorhandling/centralizedhandling.brazilian-portuguese.md)
 
 <br/><br/>
 
@@ -160,7 +160,7 @@ Leia em diferentes linguagens: [![CN](/assets/flags/CN.png)**CN**](/README.chine
 
 **Caso contrário:** Um cliente de uma API pode decidir travar e reiniciar, apenas pelo motivo de ter recebido de volta um erro que não conseguiu entender. Nota: o visitante de sua API pode ser você (muito comum em um ambiente de microsserviço).
 
-🔗 [**Leia Mais: documentando erros no Swagger**](/sections/errorhandling/documentingusingswagger.md)
+🔗 [**Leia Mais: documentando erros no Swagger**](/sections/errorhandling/documentingusingswagger.brazilian-portuguese.md)
 
 <br/><br/>
 
@@ -170,7 +170,7 @@ Leia em diferentes linguagens: [![CN](/assets/flags/CN.png)**CN**](/README.chine
 
 **Caso contrário:** Quando uma exceção desconhecida é lançada, algum objeto pode estar com defeito (por exemplo, um emissor de evento que é usado globalmente e não dispara mais eventos devido a alguma falha interna) e todas as requisições futuras podem falhar ou se comportar loucamente.
 
-🔗 [**Leia Mais: finalizando o processo**](/sections/errorhandling/shuttingtheprocess.md)
+🔗 [**Leia Mais: finalizando o processo**](/sections/errorhandling/shuttingtheprocess.brazilian-portuguese.md)
 
 <br/><br/>
 
@@ -180,7 +180,7 @@ Leia em diferentes linguagens: [![CN](/assets/flags/CN.png)**CN**](/README.chine
 
 **Caso contrário:** Ficar procurando através de console.logs ou manualmente em arquivos de texto confusos sem utilizar ferramentas de consulta ou um visualizador de log decente, pode mantê-lo ocupado até tarde.
 
-🔗 [**Leia Mais: usando um logger maduro**](/sections/errorhandling/usematurelogger.md)
+🔗 [**Leia Mais: usando um logger maduro**](/sections/errorhandling/usematurelogger.brazilian-portuguese.md)
 
 <br/><br/>
 
@@ -190,7 +190,7 @@ Leia em diferentes linguagens: [![CN](/assets/flags/CN.png)**CN**](/README.chine
 
 **Caso contrário:** Sem testes, seja automático ou manual, não podemos confiar em nosso código para retornar os erros certos. Sem erros significantes, não há tratamento de erros.
 
-🔗 [**Leia Mais: fluxos de testes de erros**](/sections/errorhandling/testingerrorflows.md)
+🔗 [**Leia Mais: fluxos de testes de erros**](/sections/errorhandling/testingerrorflows.brazilian-portuguese.md)
 
 <br/><br/>
 
@@ -200,7 +200,7 @@ Leia em diferentes linguagens: [![CN](/assets/flags/CN.png)**CN**](/README.chine
 
 **Caso contrário:** Você pode gastar muito esforço medindo o desempenho e os tempos de inatividade (downtime) da API. Provavelmente, você nunca saberá quais são suas partes de código mais lentas no cenário real e como elas afetam o UX.
 
-🔗 [**Leia Mais: usando APM**](/sections/errorhandling/apmproducts.md)
+🔗 [**Leia Mais: usando APM**](/sections/errorhandling/apmproducts.brazilian-portuguese.md)
 
 <br/><br/>
 
@@ -210,7 +210,7 @@ Leia em diferentes linguagens: [![CN](/assets/flags/CN.png)**CN**](/README.chine
 
 **Caso contrário:** Seus erros serão engolidos e não vão deixar rastros. Nada para se preocupar.
 
-🔗 [**Leia Mais: capturando rejeições de promises não tratadas**](/sections/errorhandling/catchunhandledpromiserejection.md)
+🔗 [**Leia Mais: capturando rejeições de promises não tratadas**](/sections/errorhandling/catchunhandledpromiserejection.brazilian-portuguese.md)
 
 <br/><br/>
 
@@ -220,7 +220,7 @@ Leia em diferentes linguagens: [![CN](/assets/flags/CN.png)**CN**](/README.chine
 
 **Caso contrário:** Considere isto: sua função espera receber um “Desconto” como argumento numérico que foi esquecido de passar. Mais adiante, seu código verifica se Desconto!=0 (valor do desconto permitido é maior que zero). Depois, irá permitir que o usuário desfrute de um desconto. Meu Deus, que baita bug. Entendeu?
 
-🔗 [**Leia Mais: falhando rápido**](/sections/errorhandling/failfast.md)
+🔗 [**Leia Mais: falhando rápido**](/sections/errorhandling/failfast.brazilian-portuguese.md)
 
 <br/><br/><br/>
 
@@ -423,13 +423,13 @@ Todas as declarações acima false se feitas com `===`.
 
 <br/><br/>
 
-## ![✔] 4.2 Include 3 parts in each test name
+## ![✔] 4.2 Inclua 3 partes em cada nome de teste
 
-**TL;DR:** Make the test speak at the requirements level so it's self explanatory also to QA engineers and developers who are not familiar with the code internals. State in the test name what is being tested (unit under test), under what circumstances and what is the expected result
+**TL;DR:** Faça o teste falar no nível de requisitos, de modo que seja autoexplicativo para engenheiros de garantia de qualidade e desenvolvedores que não estão familiarizados com o código. Indicar no nome do teste o que está sendo testado (unidade em teste), em que circunstâncias e qual é o resultado esperado.
 
-**Otherwise:** A deployment just failed, a test named “Add product” failed. Does this tell you what exactly is malfunctioning?
+**Caso contrário:** Uma implantação falhou, um teste chamado "Adicionar produto" falhou. Isso lhe diz exatamente o que está errado?
 
-🔗 [**Read More: Include 3 parts in each test name**](/sections/testingandquality/3-parts-in-name.md)
+🔗 [**Leia Mais: Inclua 3 partes em cada nome de teste**](/sections/testingandquality/3-parts-in-name.md)
 
 <br/><br/>
 
