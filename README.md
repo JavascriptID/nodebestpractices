@@ -9,7 +9,7 @@
 <br/>
 
 <div align="center">
-  <img src="https://img.shields.io/badge/⚙%20Item%20count%20-%2082%20Best%20Practices-blue.svg" alt="82 items"> <img src="https://img.shields.io/badge/%F0%9F%93%85%20Last%20update%20-%20Apr%2013%202019-green.svg" alt="Last update: April 13, 2019"> <img src="https://img.shields.io/badge/ %E2%9C%94%20Updated%20For%20Version%20-%20Node%2010.15.3%20LTS-brightgreen.svg" alt="Updated for Node 10.15.3 LTS">
+  <img src="https://img.shields.io/badge/⚙%20Item%20count%20-%2082%20Best%20Practices-blue.svg" alt="83 items"> <img src="https://img.shields.io/badge/%F0%9F%93%85%20Last%20update%20-%20Apr%2013%202019-green.svg" alt="Last update: April 13, 2019"> <img src="https://img.shields.io/badge/ %E2%9C%94%20Updated%20For%20Version%20-%20Node%2010.15.3%20LTS-brightgreen.svg" alt="Updated for Node 10.15.3 LTS">
 </div>
 
 <br/>
@@ -26,15 +26,11 @@ Read in a different language: [![CN](/assets/flags/CN.png)**CN**](/README.chines
 
 # Latest Best Practices and News
 
+- **New best practice:** 4.4: [Avoid test-fixtures, add data per test](https://github.com/i0natan/nodebestpractices#4-testing-and-overall-quality-practices)
+
 - **New best practice:** 6.25: [Avoid publishing secrets to the npm registry](/sections/security/avoid_publishing_secrets.md)
 
 - **New translation:** ![BR](/assets/flags/BR.png) [Brazilian Portuguese](/README.brazilian-portuguese.md) available now, courtesy of [Marcelo Melo](https://github.com/marcelosdm)! ❤️
-
-- **New best practice:** 4.2: Include 3 parts in each test name - [_From the section "Testing and overall quality"_](https://github.com/i0natan/nodebestpractices#4-testing-and-overall-quality-practices)
-
-- **New best practice:** 7.1: Prefer native JS methods over user-land utils like Lodash - [_From the section "Performance"_](https://github.com/i0natan/nodebestpractices#7-performance-best-practices)
-
-- **News update:** [We kicked-off the performance section, wanna join?](https://github.com/i0natan/nodebestpractices/issues/302)
 
 <br/><br/>
 
@@ -53,7 +49,7 @@ Read in a different language: [![CN](/assets/flags/CN.png)**CN**](/README.chines
 1.  [Project Structure Practices (5)](#1-project-structure-practices)
 2.  [Error Handling Practices (11) ](#2-error-handling-practices)
 3.  [Code Style Practices (12) ](#3-code-style-practices)
-4.  [Testing And Overall Quality Practices (10) ](#4-testing-and-overall-quality-practices)
+4.  [Testing And Overall Quality Practices (11) ](#4-testing-and-overall-quality-practices)
 5.  [Going To Production Practices (18) ](#5-going-to-production-practices)
 6.  [Security Practices (25)](#6-security-best-practices)
 7.  [Performance Practices (1) (In Progress️ ✍️)](#7-performance-best-practices)
@@ -444,15 +440,17 @@ All statements above will return false if used with `===`
 
 <br/><br/>
 
-## ![✔] 4.4 Carefully choose your CI platform (Jenkins vs CircleCI vs Travis vs Rest of the world)
+## ![✔] 4.4 Avoid global test fixtures and seeds, add data per-test
 
-**TL;DR:** Your continuous integration platform (CICD) will host all the quality tools (e.g test, lint) so it should come with a vibrant ecosystem of plugins. [Jenkins](https://jenkins.io/) used to be the default for many projects as it has the biggest community along with a very powerful platform at the price of complex setup that demands a steep learning curve. Nowadays, it has become much easier to set up a CI solution using SaaS tools like [CircleCI](https://circleci.com) and others. These tools allow crafting a flexible CI pipeline without the burden of managing the whole infrastructure. Eventually, it's a trade-off between robustness and speed - choose your side carefully
+**TL;DR:** To prevent tests coupling and easily reason about the test flow, each test should add and act on its own set of DB rows. Whenever a test needs to pull or assume the existence of some DB data - it must explicitly add that data and avoid mutating any other records
 
-**Otherwise:** Choosing some niche vendor might get you blocked once you need some advanced customization. On the other hand, going with Jenkins might burn precious time on infrastructure setup
+**Otherwise:** Consider a scenario where deployment is aborted due to failing tests, team is now going to spend precious investigation time that ends in a sad conclusion: the system works well, the tests however interfere with each other and break the build
 
-🔗 [**Read More: Choosing CI platform**](/sections/testingandquality/citools.md)
+🔗 [**Read More: Avoid global test fixtures**](/sections/testingandquality/avoid-global-test-fixture.md)
 
 <br/><br/>
+
+
 
 ## ![✔] 4.5 Constantly inspect for vulnerable dependencies
 
@@ -502,7 +500,18 @@ All statements above will return false if used with `===`
 
 🔗 [**Read More: Refactoring!**](/sections/testingandquality/refactoring.md)
 
+<br/><br/>
+
+## ![✔] 4.11 Carefully choose your CI platform (Jenkins vs CircleCI vs Travis vs Rest of the world)
+
+**TL;DR:** Your continuous integration platform (CICD) will host all the quality tools (e.g test, lint) so it should come with a vibrant ecosystem of plugins. [Jenkins](https://jenkins.io/) used to be the default for many projects as it has the biggest community along with a very powerful platform at the price of complex setup that demands a steep learning curve. Nowadays, it has become much easier to set up a CI solution using SaaS tools like [CircleCI](https://circleci.com) and others. These tools allow crafting a flexible CI pipeline without the burden of managing the whole infrastructure. Eventually, it's a trade-off between robustness and speed - choose your side carefully
+
+**Otherwise:** Choosing some niche vendor might get you blocked once you need some advanced customization. On the other hand, going with Jenkins might burn precious time on infrastructure setup
+
+🔗 [**Read More: Choosing CI platform**](/sections/testingandquality/citools.md)
+
 <br/><br/><br/>
+
 
 <p align="right"><a href="#table-of-contents">⬆ Return to top</a></p>
 
