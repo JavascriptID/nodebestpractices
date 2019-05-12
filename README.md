@@ -9,7 +9,7 @@
 <br/>
 
 <div align="center">
-  <img src="https://img.shields.io/badge/⚙%20Item%20count%20-%2082%20Best%20Practices-blue.svg" alt="83 items"> <img src="https://img.shields.io/badge/%F0%9F%93%85%20Last%20update%20-%20Apr%2013%202019-green.svg" alt="Last update: April 13, 2019"> <img src="https://img.shields.io/badge/ %E2%9C%94%20Updated%20For%20Version%20-%20Node%2010.15.3%20LTS-brightgreen.svg" alt="Updated for Node 10.15.3 LTS">
+  <img src="https://img.shields.io/badge/⚙%20Item%20count%20-%2083%20Best%20Practices-blue.svg" alt="83 items"> <img src="https://img.shields.io/badge/%F0%9F%93%85%20Last%20update%20-%20Apr%2013%202019-green.svg" alt="Last update: May 13, 2019"> <img src="https://img.shields.io/badge/ %E2%9C%94%20Updated%20For%20Version%20-%20Node%2012.0.0%20LTS-brightgreen.svg" alt="Updated for Node 12.0.0 LTS">
 </div>
 
 <br/>
@@ -269,27 +269,47 @@ function someFunction()
 
 <br/><br/>
 
-## ![✔] 3.4 Don't Forget the Semicolon
+## ![✔] 3.4 Separate your statements properly
 
-**TL;DR:** While not unanimously agreed upon, it is still recommended to put a semicolon at the end of each statement. This will make your code more readable and explicit to other developers who read it
+No matter if you use semicolons or not to separate your statements, knowing the common pitfalls of improper linebreaks or automatic semicolon insertion, will help you to eliminate regular syntax errors.
 
-**Otherwise:** As seen in the previous section, JavaScript's interpreter automatically adds a semicolon at the end of a statement if there isn't one, or considers a statement as not ended where it should, which might lead to some undesired results
+**TL;DR:** Use ESLint to gain awareness about separation concerns. [Prettier](https://prettier.io/) or [Standardjs](https://standardjs.com/) can automatically resolve these issues.
+
+**Otherwise:** As seen in the previous section, JavaScript's interpreter automatically adds a semicolon at the end of a statement if there isn't one, or considers a statement as not ended where it should, which might lead to some undesired results. You can use assignments and avoid using immediate invoked function expressions to prevent most of unexpected errors.
 
 ### Code example
 
 ```javascript
 // Do
-const count = 2;
-(function doSomething() {
-  // do something amazing
-}());
+function doThing() {
+    // ...
+}
+
+doThing()
+
+// Do
+
+const items = [1, 2, 3]
+items.forEach(console.log)
+
+// Avoid — throws exception
+const m = new Map()
+const a = [1,2,3]
+[...m.values()].forEach(console.log)
+> [...m.values()].forEach(console.log)
+>  ^^^
+> SyntaxError: Unexpected token ...
 
 // Avoid — throws exception
 const count = 2 // it tries to run 2(), but 2 is not a function
 (function doSomething() {
   // do something amazing
 }())
+// put a semicolon before the immediate invoked function, after the const definition, save the return value of the anonymous function to a variable or avoid IIFEs alltogether
 ```
+
+🔗 [**Read more:** "Semi ESLint rule"](https://eslint.org/docs/rules/semi)
+🔗 [**Read more:** "No unexpected multiline ESLint rule"](https://eslint.org/docs/rules/no-unexpected-multiline)
 
 <br/><br/>
 
@@ -1183,7 +1203,12 @@ We appreciate any contribution, from a single word fix to a new best practice. B
 🌻 [Ryan Ouyang](https://github.com/ryanouyang),
 🌻 [Gabriel Lidenor](https://github.com/GabrielLidenor),
 🌻 [Roman](https://github.com/animir),
-🌻 [Francozeira](https://github.com/Francozeira)
+🌻 [Invvard](https://github.com/Invvard),
+🌻 [Rômulo Garofalo](https://github.com/romulogarofalo),
+🌻 [Tho Q Luong](https://github.com/thoqbk),
+🌻 [Burak Shen](https://github.com/Qeneke),
+🌻 [Martin Muzatko](https://github.com/MartinMuzatko)
+
 
 ### Stars
 
