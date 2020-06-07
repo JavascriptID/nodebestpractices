@@ -871,11 +871,65 @@
       ]
     },
     {
-
       "login": "songe",
       "name": "songe",
       "avatar_url": "https://avatars2.githubusercontent.com/u/1531561?v=4",
       "profile": "https://github.com/songe",
+      "contributions": [
+        "content"
+      ]
+    },
+    {
+      "login": "Ksedline",
+      "name": "Kirill Shekhovtsov",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/30693707?v=4",
+      "profile": "http://ksed.dev",
+      "contributions": [
+        "content"
+      ]
+    },
+    {
+      "login": "SerzN1",
+      "name": "Serge",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/2534649?v=4",
+      "profile": "https://github.com/SerzN1",
+      "contributions": [
+        "content"
+      ]
+    },
+    {
+      "login": "keyrwinz",
+      "name": "keyrwinz",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/21241761?v=4",
+      "profile": "https://github.com/keyrwinz",
+      "contributions": [
+        "content"
+      ]
+    },
+    {
+      "login": "nDmitry",
+      "name": "Dmitry Nikitenko",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/2134568?v=4",
+      "profile": "https://github.com/nDmitry",
+      "contributions": [
+        "content"
+      ]
+    },
+    {
+      "login": "bushuai",
+      "name": "bushuai",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/1875256?v=4",
+      "profile": "https://bushuai.cc",
+      "contributions": [
+        "review",
+        "content"
+      ]
+    },
+    {
+      "login": "benjamingr",
+      "name": "Benjamin Gruenbaum",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/1315533?v=4",
+      "profile": "https://stackoverflow.com/users/1348195/benjamin-gruenbaum",
       "contributions": [
         "content"
       ]
