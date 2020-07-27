@@ -54,6 +54,7 @@ Read in a different language: [![CN](/assets/flags/CN.png)**CN**](/README.chines
 5. [Going To Production Practices (19) ](#5-going-to-production-practices)
 6. [Security Practices (25)](#6-security-best-practices)
 7. [Performance Practices (2) (Work In Progress️ ✍️)](#7-draft-performance-best-practices)
+8. [Docker Practices (Work In Progress️ ✍️)](#7-draft-docker-best-practices)
 
 <br/><br/>
 
@@ -258,7 +259,7 @@ function someFunction() {
 }
 
 // Avoid
-function someFunction() 
+function someFunction()
 {
   // code block
 }
@@ -994,7 +995,7 @@ All statements above will return false if used with `===`
 
 **TL;DR:** Any step in the development chain should be protected with MFA (multi-factor authentication), npm/Yarn are a sweet opportunity for attackers who can get their hands on some developer's password. Using developer credentials, attackers can inject malicious code into libraries that are widely installed across projects and services. Maybe even across the web if published in public. Enabling 2-factor-authentication in npm leaves almost zero chances for attackers to alter your package code.
 
-**Otherwise:** [Have you heard about the eslint developer who's password was hijacked?](https://medium.com/@oprearocks/eslint-backdoor-what-it-is-and-how-to-fix-the-issue-221f58f1a8c8)
+**Otherwise:** [Have you heard about the eslint developer whose password was hijacked?](https://medium.com/@oprearocks/eslint-backdoor-what-it-is-and-how-to-fix-the-issue-221f58f1a8c8)
 
 <br/><br/>
 
@@ -1072,6 +1073,176 @@ Bear in mind that with the introduction of the new V8 engine alongside the new E
 
 <br/><br/><br/>
 
+<p align="right"><a href="#table-of-contents">⬆ Return to top</a></p>
+
+# `7. Draft: Docker Best Practices`
+
+## Our contributors are working on this section. [Would you like to join?](https://github.com/goldbergyoni/nodebestpractices/issues/682)
+
+<br/><br/>
+
+## ![✔] 8.1. Clean npm cache
+
+**TL;DR:**
+
+**Otherwise:**
+
+🔗 [**Read More: Clean npm cache**](/sections/docker/file.md)
+
+<br /><br /><br />
+
+## ![✔] 8.2. Bootstrap the code using 'node' command, avoid 'npm run' scripts
+
+**TL;DR:**
+
+**Otherwise:**
+
+🔗 [**Read More: Clean npm cache**](/sections/docker/file.md)
+
+<br /><br /><br />
+
+## ![✔] 8.3. Remove development dependencies
+
+**TL;DR:** Althoug DevDepencies are sometimes needed during the build and test life-cycle, eventually the image that is shipped to production should be minimal and clean from development depdencies. Doing so gurantess that only neccessary code is shipped and the amount of potnetial attacks (i.e. attack surface) is minimized. When using multi stage build (see dedicated bullet) this can be achieved by installing all dependencies first and finally running 'npm ci --production'
+
+**Otherwise:** Many of the infamous npm security breaches were found within development packages
+
+🔗 [**Read More: Remove development dependencies**](/sections/docker/install-for-production.md)
+
+<br /><br /><br />
+
+## ![✔] 8.4. Lint your Dockerfile
+
+**TL;DR:**
+
+**Otherwise:**
+
+🔗 [**Read More: Lint your Dockerfile**](/sections/docker/file.md)
+
+<br /><br /><br />
+
+## ![✔] 8.5. Utilize caching for better build time
+
+**TL;DR:**
+
+**Otherwise:**
+
+🔗 [**Read More: Utilize caching for better build time**](/sections/docker/file.md)
+
+<br /><br /><br />
+
+## ![✔] 8.6. Set Docker memory limits which are in-par with v8 memory limit
+
+**TL;DR:**
+
+**Otherwise:**
+
+🔗 [**Read More: Set Docker memory limits which are in-par with v8 memory limit**](/sections/docker/file.md)
+
+<br /><br /><br />
+
+## ![✔] 8.7. Scan your image for vulnerabilities
+
+**TL;DR:** Besides checking code dependencies vulnerabilities, also scan the final image that is shipped to production. Docker image scanners check the code dependencies but also the OS binaries. This E2E security scan covers more ground and verifies that no bad guy injected bad things during the build. Consequently, it is recommended running this as the last step before deployment. There are a handful of free and commercial scanners that also provide CI/CD plugins
+
+**Otherwise:** Your code might be entirely free from vulnerabilities. However, it might still get hacked due to vulnerable version of OS-level binaries (e.g. OpenSSL, TarBall)  that are commonly being used by applications
+
+🔗 [**Read More: Scan your image for vulnerabilities**](/sections/docker/scan-images.md)
+
+<br /><br /><br />
+
+## ![✔] 8.8. Use multistage builds
+
+**TL;DR:**
+
+**Otherwise:**
+
+🔗 [**Read More: Use multistage builds**](/sections/docker/file.md)
+
+<br /><br /><br />
+
+## ![✔] 8.9. Don't use "latest" tags, use a digest
+
+**TL;DR:**
+
+**Otherwise:**
+
+🔗 [**Read More: Don't use "latest", use a digest**](/sections/docker/file.md)
+
+<br /><br /><br />
+
+## ![✔] 8.10. Prefer smaller images
+
+**TL;DR:**
+
+**Otherwise:**
+
+🔗 [**Read More: Prefer smaller images**](/sections/docker/file.md)
+
+<br /><br /><br />
+
+## ![✔] 8.11. Graceful shutdown
+
+**TL;DR:**
+
+**Otherwise:**
+
+🔗 [**Read More: Graceful shutdown**](/sections/docker/file.md)
+
+<br /><br /><br />
+
+## ![✔] 8.12. Avoid sending secrets as build time arguments
+
+**TL;DR:**
+
+**Otherwise:**
+
+🔗 [**Read More: Avoid sending secrets as build time arguments**](/sections/docker/file.md)
+
+<br /><br /><br />
+
+## ![✔] Use .dockerignore to prevent leaking secrets
+
+**TL;DR:** Include a .dockerignore file that filters out common secret files and development artifacts. By doing so, you might prevent secrets from leaking into the image. As a bonus, the build time will significantly decrease. Also, ensure not to copy all files recursively rather explicitly choose what should be copied to Docker
+
+**Otherwise:** Common personal secret files like .env, .aws and .npmrc will be shared with anybody with access to the image (e.g. Docker repository)
+
+🔗 [**Read More: On the importance of docker ignore**](/sections/docker/docker-ignore.md)
+
+<br /><br /><br />
+
+## ![✔] 8.14.  Avoid inconsistent images
+
+**TL;DR:**
+
+**Otherwise:**
+
+🔗 [**Read More: Avoid inconsistent images**](/sections/docker/file.md)
+
+<br /><br /><br />
+
+## ![✔] 8.15. Avoid process managers
+
+**TL;DR:**
+
+**Otherwise:**
+
+🔗 [**Read More: Avoid process managers**](/sections/docker/file.md)
+
+<br /><br /><br />
+
+## ![✔] 8.16. Generic Docker practices
+
+**TL;DR:**
+
+**Otherwise:**
+
+🔗 [**Read More: Generic Docker practices**](/sections/docker/file.md)
+
+<br /><br /><br />
+
+<p align="right"><a href="#table-of-contents">⬆ Return to top</a></p>
+
 # Milestones
 
 To maintain this guide and keep it up to date, we are constantly updating and improving the guidelines and best practices with the help of the community. You can follow our [milestones](https://github.com/goldbergyoni/nodebestpractices/milestones) and join the working groups if you want to contribute to this project
@@ -1132,14 +1303,16 @@ Full Stack Developer & Site Reliability Engineer based in New Zealand, intereste
 
 <br/>
 
+### Steering Committee Emeriti
+
 <img align="left" width="100" height="100" src="assets/images/members/sagir.png">
 
 [Sagir Khan](https://github.com/sagirk)
 <a href="https://twitter.com/sagir_k"><img src="assets/images/twitter-s.png" width="16" height="16"></img></a>
-<a href="https://sagirk.com"><img src="assets/images/www.png" width="16" height="16"></img></a>
 <a href="https://linkedin.com/in/sagirk"><img src="assets/images/linkedin.png" width="16" height="16"></img></a>
+<a href="https://sagirk.com"><img src="assets/images/www.png" width="16" height="16"></img></a>
 
-Deep specialist in JavaScript and its ecosystem — React, Node.js, MongoDB, pretty much anything that involves using JavaScript/JSON in any layer of the system — building products using the web platform for the world’s most recognized brands. Individual Member of the Node.js Foundation, collaborating on the Community Committee's Website Redesign Initiative.
+Deep specialist in JavaScript and its ecosystem — React, Node.js, TypeScript, GraphQL, MongoDB, pretty much anything that involves JS/JSON in any layer of the system — building products using the web platform for the world’s most recognized brands. Individual Member of the Node.js Foundation.
 
 <br/>
 
@@ -1149,11 +1322,11 @@ Thank you to all our collaborators! 🙏
 
 Our collaborators are members who are contributing to the repository on a regular basis, through suggesting new best practices, triaging issues, reviewing pull requests and more. If you are interested in helping us guide thousands of people to craft better Node.js applications, please read our [contributor guidelines](/.operations/CONTRIBUTING.md) 🎉
 
-| <a href="https://github.com/idori" target="_blank"><img src="assets/images/members/ido.png" width="75" height="75"></a> | <a href="https://github.com/TheHollidayInn" target="_blank"><img src="assets/images/members/keith.png" width="75" height="75"></a> |<a href="https://github.com/kevynb" target="_blank"><img src="assets/images/members/kevyn.png" width="59" height="59"></a> |
-| :---------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------: |:--------------------------------------------------------------------------------------------------------------------------------: |
-|                                    [Ido Richter (Founder)](https://github.com/idori)                                    |                                        [Keith Holliday](https://github.com/TheHollidayInn)                                         |                                       [Kevyn Bruyere](https://github.com/kevynb)                                         |
+| <a href="https://github.com/idori" target="_blank"><img src="assets/images/members/ido.png" width="75" height="75"></a> | <a href="https://github.com/TheHollidayInn" target="_blank"><img src="assets/images/members/keith.png" width="75" height="75"></a> | <a href="https://github.com/kevynb" target="_blank"><img src="assets/images/members/kevyn.png" width="59" height="59"></a> |
+| :---------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------: |
+|                                    [Ido Richter (Founder)](https://github.com/idori)                                    |                                        [Keith Holliday](https://github.com/TheHollidayInn)                                         |                                         [Kevyn Bruyere](https://github.com/kevynb)                                         |
 
-### Past collaborators
+### Collaborator Emeriti
 
 | <a href="https://github.com/refack" target="_blank"><img src="assets/images/members/refael.png" width="50" height="50"></a> |
 | :-------------------------------------------------------------------------------------------------------------------------: |
@@ -1304,6 +1477,11 @@ Thanks goes to these wonderful people who have contributed to this repository!
     <td align="center"><a href="https://github.com/nDmitry"><img src="https://avatars0.githubusercontent.com/u/2134568?v=4" width="100px;" alt=""/><br /><sub><b>Dmitry Nikitenko</b></sub></a><br /><a href="#content-nDmitry" title="Content">🖋</a></td>
     <td align="center"><a href="https://bushuai.cc"><img src="https://avatars0.githubusercontent.com/u/1875256?v=4" width="100px;" alt=""/><br /><sub><b>bushuai</b></sub></a><br /><a href="https://github.com/goldbergyoni/nodebestpractices/pulls?q=is%3Apr+reviewed-by%3Abushuai" title="Reviewed Pull Requests">👀</a> <a href="#content-bushuai" title="Content">🖋</a></td>
     <td align="center"><a href="https://stackoverflow.com/users/1348195/benjamin-gruenbaum"><img src="https://avatars2.githubusercontent.com/u/1315533?v=4" width="100px;" alt=""/><br /><sub><b>Benjamin Gruenbaum</b></sub></a><br /><a href="#content-benjamingr" title="Content">🖋</a></td>
+    <td align="center"><a href="https://github.com/byeze"><img src="https://avatars1.githubusercontent.com/u/7424138?v=4" width="100px;" alt=""/><br /><sub><b>Ezequiel</b></sub></a><br /><a href="#translation-byeze" title="Translation">🌍</a></td>
+    <td align="center"><a href="https://github.com/juaoose"><img src="https://avatars3.githubusercontent.com/u/994594?v=4" width="100px;" alt=""/><br /><sub><b>Juan José Rodríguez</b></sub></a><br /><a href="#translation-juaoose" title="Translation">🌍</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/OrBin"><img src="https://avatars1.githubusercontent.com/u/6897234?v=4" width="100px;" alt=""/><br /><sub><b>Or Bin</b></sub></a><br /><a href="#content-OrBin" title="Content">🖋</a></td>
   </tr>
 </table>
 
